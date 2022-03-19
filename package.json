@@ -20,7 +20,8 @@
   "homepage": "https://github.com/rpp33-sdc-jasmine/Product#readme",
   "dependencies": {
     "jest": "^27.5.1",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "pg": "^8.7.3"
   },
   "devDependencies": {
     "eslint": "^8.11.0",
