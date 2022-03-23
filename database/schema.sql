@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS product CASCADE;
 CREATE TABLE product (
   id INTEGER NOT NULL,
   name VARCHAR(50) NOT NULL,
-  slogan VARCHAR(100) NOT NULL,
+  slogan VARCHAR(1000) NOT NULL,
   description VARCHAR(1000) NOT NULL,
   category VARCHAR(1000) NOT NULL,
   default_price INTEGER NOT NULL,
@@ -79,3 +79,8 @@ CREATE TABLE related (
     REFERENCES product(id)
     ON DELETE NO ACTION
 );
+
+COPY product (id, name, slogan, description, category, default_price)
+FROM '/Users/wendai/Desktop/hackreactorwork/SDC_CSV/product.csv'
+DELIMITER ','
+CSV HEADER;
