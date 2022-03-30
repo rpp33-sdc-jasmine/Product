@@ -7,11 +7,11 @@ const pool = new Pool({
   user:'root',
   host: 'localhost',
   database: 'sdc',
-  password: key,
+  password: 'password',
   port: 5432,
 });
 
-const productTest = async(callback) => {
+const productTest = async (callback) => {
   const queryString = 'SELECT * FROM product WHERE id = 1';
   await pool.query(queryString, (err, res) => {
     if(err) {
