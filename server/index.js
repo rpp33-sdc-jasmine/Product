@@ -1,4 +1,4 @@
-var models = require('../database/database.js');
+var db = require('../database/database.js');
 const express = require('express');
 const port = 3000;
 const app = express();
@@ -8,7 +8,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/products', (req,res) => {
-  models.productTest((err,data) => {
+  db.productTest((err,data) => {
     if(err) {
       res.status(400);
       console.log(err.message);

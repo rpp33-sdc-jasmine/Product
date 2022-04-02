@@ -1,5 +1,5 @@
 const {Pool, Client} = require('pg');
-const {key} = require('../config.js')
+const {key} = require('../config.js');
 
 // connet with a connection pool
 
@@ -17,10 +17,11 @@ const productTest = async (callback) => {
     if(err) {
       console.log(err.message);
     } else {
-      console.log('query response', res)
-      callback(null, res);
+      //console.log('query response', res)
+      callback(null, res.rows);
     }
   })
 }
 
-module.exports = {porductTest:productTest}
+
+module.exports.productTest = productTest;
