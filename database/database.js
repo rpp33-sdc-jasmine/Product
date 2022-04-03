@@ -11,7 +11,7 @@ const pool = new Pool({
   port: 5432,
 });
 
-const productTest = async (callback) => {
+/*const productTest = async (callback) => {
   const queryString = 'SELECT * FROM product WHERE id = 1';
   await pool.query(queryString, (err, res) => {
     if(err) {
@@ -21,7 +21,27 @@ const productTest = async (callback) => {
       callback(null, res.rows);
     }
   })
+}*/
+
+const productInfo = async (product_id, callback) => {
+  const queryString = `SELECT product.id, product.name, product.slogan, product.description, product.category, product.default_price::text, json_agg(json_build_object('feature', features.feature, 'value', features.value))
+  AS features
+  FROM product
+  LEFT JOIN features
+  ON product.id = features.product_id
+  WHERE product.id = ${product_id}
+  GROUP BY product.id, product.name, product.slogan, product.description, product.category, product.default_price`;
+  await pool.query(queryString, (err,res) => {
+    if(err) {
+      console.log(err.message);
+    } else {
+      callback(null, res.rows);
+    }
+  })
 }
 
 
-module.exports.productTest = productTest;
+module.exports = {
+  productInfo : productInfo
+
+};

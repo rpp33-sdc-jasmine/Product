@@ -7,8 +7,20 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/products', (req,res) => {
+/*app.get('/products', (req,res) => {
   db.productTest((err,data) => {
+    if(err) {
+      res.status(400);
+      console.log(err.message);
+    } else {
+      res.send(data);
+    }
+  })
+})*/
+
+app.get('/products/:product_id', (req,res) => {
+  let productId = req.params.product_id;
+  db.productInfo(productId, (err,data) => {
     if(err) {
       res.status(400);
       console.log(err.message);
