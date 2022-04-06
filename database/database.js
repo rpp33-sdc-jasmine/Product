@@ -11,7 +11,7 @@ const pool = new Pool({
   port: 5432,
 });
 
-/*const productTest = async (callback) => {
+const productTest = async (callback) => {
   const queryString = 'SELECT * FROM product WHERE id = 1';
   await pool.query(queryString, (err, res) => {
     if(err) {
@@ -21,7 +21,7 @@ const pool = new Pool({
       callback(null, res.rows);
     }
   })
-}*/
+}
 
 const productInfo = async (product_id, callback) => {
   const queryString = `SELECT product.id, product.name, product.slogan, product.description, product.category, product.default_price::text, json_agg(json_build_object('feature', features.feature, 'value', features.value))
