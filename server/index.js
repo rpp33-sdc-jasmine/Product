@@ -30,6 +30,33 @@ app.get('/products/:product_id', (req,res) => {
   })
 })
 
+app.get('/products/:product_id/styles', (req,res) => {
+  let productId = req.params.product_id;
+  db.productStyle(productId, (err,data) => {
+    if(err) {
+      res.status(400);
+      console.log(err.message);
+    } else {
+      res.send(data);
+    }
+  })
+})
+
+app.get('/products/:product_id/related', (req,res) => {
+  let productId = req.params.product_id;
+  db.relatedProducts(productId, (err,data) => {
+    if(err) {
+      res.status(400);
+      console.log(err.message);
+    } else {
+      res.send(data);
+    }
+  })
+})
+
 app.listen(port, () => {
   console.log(`Successfully connected to the port ${port}`)
 })
+
+
+module.exports.app = app;

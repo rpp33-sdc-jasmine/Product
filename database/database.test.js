@@ -19,7 +19,7 @@ describe('testing postgres', () => {
     await pool.end();
   })
 
-  it('should test', async() => {
+  it('Test product table with query', async() => {
     const client = await pool.connect();
     try{
       await client.query('BEGIN');
