@@ -75,6 +75,7 @@ const relatedProducts = async (product_id, callback) => {
   })
 }
 module.exports = {
+  productTest : productTest,
   productInfo : productInfo,
   productStyle: productStyle,
   relatedProducts: relatedProducts
