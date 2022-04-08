@@ -1,6 +1,5 @@
 var db = require('../database/database.js');
 const express = require('express');
-//const port = 3000;
 const PORT = process.env.PORT || 3000;
 const app = express();
 const bodyParser = require('body-parser');
@@ -57,11 +56,6 @@ app.get('/products/:product_id/related', (req,res) => {
 
 
 
-//console.log(process.env);
-
-/*app.listen(port, () => {
-  console.log(`Successfully connected to the port ${port}`)
-})*/
 
 if (process.env.NODE_ENV !== 'test') {
   app.listen(PORT, () => {
