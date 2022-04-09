@@ -11,13 +11,12 @@ const pool = new Pool({
   port: 5432,
 });
 
-const productTest = async (callback) => {
-  const queryString = 'SELECT * FROM product WHERE id = 1';
+const allProducts = async (page, count, callback) => {
+  const queryString = `SELECT * FROM product ORDER BY id LIMIT ${count} OFFSET ${page * count}`;
   await pool.query(queryString, (err, res) => {
     if(err) {
       console.log(err.message);
     } else {
-      //console.log('query response', res)
       callback(null, res.rows);
     }
   })
@@ -75,7 +74,7 @@ const relatedProducts = async (product_id, callback) => {
   })
 }
 module.exports = {
-  productTest : productTest,
+  allProducts : allProducts,
   productInfo : productInfo,
   productStyle: productStyle,
   relatedProducts: relatedProducts

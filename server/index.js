@@ -8,7 +8,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/products', (req,res) => {
-  db.productTest((err,data) => {
+  let{page, count} = req.query;
+  if(page === undefined) {
+    //page need to be 0, otherwise will skipping rows = count
+    page = 0;
+  }
+  if(count === undefined) {
+    count = 5;
+  }
+
+  db.allProducts(page, count, (err,data) => {
     if(err) {
       res.status(400);
       console.log(err.message);
