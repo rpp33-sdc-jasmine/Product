@@ -21,7 +21,7 @@ const allProducts = async (page, count, callback) => {
     }
   })
 }
-
+/*
 const productInfo = async (product_id, callback) => {
   const queryString = `SELECT product.id, product.name, product.slogan, product.description, product.category, product.default_price::text, json_agg(json_build_object('feature', features.feature, 'value', features.value)) AS features
   FROM product
@@ -37,6 +37,22 @@ const productInfo = async (product_id, callback) => {
     }
   })
 }
+*/
+const productInfo = async (product_id, callback) => {
+  const queryString = `SELECT product.id, product.name, product.slogan, product.description, product.category, product.default_price::text,
+  (SELECT json_agg(json_build_object('feature',feature, 'value', value )) AS features
+  FROM features WHERE product.id = features.product_id
+  GROUP BY product_id) FROM product WHERE product.id = ${product_id}
+  GROUP BY product.id`;
+  await pool.query(queryString, (err,res) => {
+    if(err) {
+      console.log(err.message);
+    } else {
+      callback(null, res.rows);
+    }
+  })
+}
+
 
 
 const productStyle = async (product_id, callback) => {
