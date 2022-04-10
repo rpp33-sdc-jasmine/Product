@@ -29,15 +29,15 @@ describe('/products/:product_id', () => {
     const res = await supertest(app).get('/products/3');
     expect(res.statusCode).toEqual(200);
     expect(res.body).toBeDefined();
-    expect(res.body[0]).toHaveProperty('category', 'Pants');
-    expect(res.body[0]).toHaveProperty('id', 3);
-    expect(res.body[0]).toHaveProperty('name', 'Morning Joggers');
+    expect(res.body).toHaveProperty('category', 'Pants');
+    expect(res.body).toHaveProperty('id', 3);
+    expect(res.body).toHaveProperty('name', 'Morning Joggers');
   });
 
   it('should return data in the correct format', async() => {
     const res = await supertest(app).get('/products/3');
-    expect(res.body[0].features).toBeInstanceOf(Array);
-    expect(res.body[0].features[0]).toBeInstanceOf(Object);
+    expect(res.body.features).toBeInstanceOf(Array);
+    expect(res.body.features[0]).toBeInstanceOf(Object);
   });
 });
 
@@ -47,16 +47,15 @@ describe('/products/:product_id/styles', () => {
     const res = await supertest(app).get('/products/3/styles');
     expect(res.statusCode).toEqual(200);
     expect(res.body).toBeDefined();
-    expect(res.body[0]).toBeInstanceOf(Object);
-    expect(res.body[0]).toHaveProperty('product_id');
-    expect(res.body[0]).toHaveProperty('results');
-    expect(res.body[0].results).toBeInstanceOf(Array);
-    let results = res.body[0].results[0];
+    expect(res.body).toBeInstanceOf(Object);
+    expect(res.body).toHaveProperty('product_id');
+    expect(res.body).toHaveProperty('results');
+    expect(res.body.results).toBeInstanceOf(Array);
+    let results = res.body.results[0];
     expect(results).toBeInstanceOf(Object);
     expect(results).toHaveProperty('photos');
     expect(results).toHaveProperty('skus');
     expect(results.skus).toBeInstanceOf(Object);
-    expect(results.skus['49']).toBeInstanceOf(Object);
 
   });
 });
