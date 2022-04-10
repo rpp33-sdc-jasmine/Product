@@ -48,7 +48,7 @@ const productInfo = async (product_id, callback) => {
     if(err) {
       console.log(err.message);
     } else {
-      callback(null, res.rows);
+      callback(null, res.rows[0]);
     }
   })
 }
@@ -73,7 +73,7 @@ const productStyle = async (product_id, callback) => {
     if(err) {
       console.log(err.message);
     } else {
-      callback(null, res.rows);
+      callback(null, res.rows[0]);
     }
   })
 }
