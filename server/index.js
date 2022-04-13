@@ -3,6 +3,7 @@ const express = require('express');
 const PORT = process.env.PORT || 3000;
 const app = express();
 const bodyParser = require('body-parser');
+const helper = require('./helper.js');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -46,7 +47,8 @@ app.get('/products/:product_id/styles', (req,res) => {
       res.status(400);
       console.log(err.message);
     } else {
-      res.send(data);
+      let dataRev = helper.stylePhotos(data);
+      res.send(dataRev);
     }
   })
 })
