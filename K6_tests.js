@@ -2,7 +2,11 @@ import http from "k6/http";
 import { check, sleep } from "k6";
 export let options = {
   vus: 300,
-  duration: "30s"
+  duration: "30s",
+  thresholds: {
+    http_req_failed: ['rate<0.01'], // http errors should be less than 1%
+    http_req_duration: ['p(95)<2000'], // 95% of requests should be below 2000ms
+  }
 };
 /*export default function() {
   //or use product id 999999
