@@ -42,15 +42,12 @@ const productInfo = async (product_id, callback) => {
 const productStyle = async (product_id, callback) => {
   const queryString = `SELECT product_id, json_agg(json_build_object('style_id', id, 'name', name, 'original_price', original_price::text, 'sale_price', sale_price::text,'default?', default_style,
   'photos',
-  (SELECT json_agg(json_build_object('thumbnail_url',thumbnail_url, 'url', url ))
-  FROM photos WHERE style_id = styles.id
-  GROUP BY style_id),
+  (SELECT COALESCE(json_agg(json_build_object('thumbnail_url',thumbnail_url, 'url', url )), '[{"thumbnail_url":"", "url":""}]') AS photos
+  FROM photos WHERE style_id = styles.id),
   'skus',
-  (SELECT json_object_agg(id,json_build_object('quantity', quantity, 'size', size))
-  FROM skus WHERE style_id = styles.id
-  GROUP BY style_id)
-  )) AS results FROM styles
-  WHERE styles.product_id = ${product_id}
+  (SELECT COALESCE(json_object_agg(id,json_build_object('quantity', quantity, 'size', size)), NULL, '{}') AS skus
+  FROM skus WHERE style_id = styles.id)
+  )) AS results FROM styles WHERE styles.product_id = ${product_id}
   GROUP BY product_id
   `;
   await pool.query(queryString, (err,res) => {

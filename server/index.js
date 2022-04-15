@@ -47,8 +47,7 @@ app.get('/products/:product_id/styles', (req,res) => {
       res.status(400);
       console.log(err.message);
     } else {
-      let dataRev = helper.stylePhotos(data);
-      res.send(dataRev);
+      res.send(data);
     }
   })
 })

@@ -1,7 +1,7 @@
 import http from "k6/http";
 import { check, sleep } from "k6";
 export let options = {
-  vus: 2000,
+  vus: 1000,
   duration: "10s",
   thresholds: {
     http_req_failed: ['rate<0.01'], // http errors should be less than 1%
@@ -9,10 +9,10 @@ export let options = {
   }
 };
 
-/*export default function() {
+export default function() {
   const rnd =Math.floor(Math.random() * (1000000 - 900000) + 900000);
   const before = new Date().getTime();
-  const T = 2; // time needed to complete a VU iteration
+  const T = 1; // time needed to complete a VU iteration
 
   let res = http.get(`http://localhost:3000/products/${rnd}`);
   check(res, {
@@ -28,12 +28,12 @@ export let options = {
     console.warn(`Timer exhausted! The execution time of the test took longer than ${T} seconds`);
   }
 
-};*/
+};
 
-export default function() {
+/*export default function() {
   const rnd =Math.floor(Math.random() * (1000000 - 900000) + 900000);
   const before = new Date().getTime();
-  const T = 2; // time needed to complete a VU iteration
+  const T = 1; // time needed to complete a VU iteration
 
   let res = http.get(`http://localhost:3000/products/${rnd}/styles`);
   check(res, {
@@ -48,4 +48,4 @@ export default function() {
   } else {
     console.warn(`Timer exhausted! The execution time of the test took longer than ${T} seconds`);
   }
-};
+};*/
