@@ -9,7 +9,7 @@ export let options = {
   }
 };
 
-export default function() {
+/*export default function() {
   const rnd =Math.floor(Math.random() * (1000000 - 900000) + 900000);
   const before = new Date().getTime();
   const T = 1; // time needed to complete a VU iteration
@@ -28,7 +28,7 @@ export default function() {
     console.warn(`Timer exhausted! The execution time of the test took longer than ${T} seconds`);
   }
 
-};
+};*/
 
 /*export default function() {
   const rnd =Math.floor(Math.random() * (1000000 - 900000) + 900000);
@@ -49,3 +49,24 @@ export default function() {
     console.warn(`Timer exhausted! The execution time of the test took longer than ${T} seconds`);
   }
 };*/
+
+export default function() {
+  const rnd =Math.floor(Math.random() * (1000000 - 900000) + 900000);
+  const before = new Date().getTime();
+  const T = 1; // time needed to complete a VU iteration
+
+  let res = http.get(`http://localhost:3000/products/${rnd}/related`);
+  check(res, {
+    "success": (r) => r.status == 200
+  });
+
+  const after = new Date().getTime();
+  const diff = (after - before) / 1000;
+  const remainder = T - diff;
+  if (remainder > 0) {
+    sleep(remainder);
+  } else {
+    console.warn(`Timer exhausted! The execution time of the test took longer than ${T} seconds`);
+  }
+
+};
