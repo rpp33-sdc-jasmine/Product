@@ -3,7 +3,8 @@ const express = require('express');
 const PORT = process.env.PORT || 3000;
 const app = express();
 const bodyParser = require('body-parser');
-const helper = require('./helper.js');
+//const helper = require('./helper.js');
+//const newrelic = require('newrelic')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -63,7 +64,6 @@ app.get('/products/:product_id/related', (req,res) => {
     }
   })
 })
-
 
 
 

@@ -2,7 +2,7 @@ import http from "k6/http";
 import { check, sleep } from "k6";
 export let options = {
   vus: 1000,
-  duration: "10s",
+  duration: "30s",
   thresholds: {
     http_req_failed: ['rate<0.01'], // http errors should be less than 1%
     http_req_duration: ['p(95)<2000'], // 95% of requests should be below 2000ms
@@ -30,7 +30,7 @@ export let options = {
 
 };*/
 
-/*export default function() {
+export default function() {
   const rnd =Math.floor(Math.random() * (1000000 - 900000) + 900000);
   const before = new Date().getTime();
   const T = 1; // time needed to complete a VU iteration
@@ -48,9 +48,9 @@ export let options = {
   } else {
     console.warn(`Timer exhausted! The execution time of the test took longer than ${T} seconds`);
   }
-};*/
+};
 
-export default function() {
+/*export default function() {
   const rnd =Math.floor(Math.random() * (1000000 - 900000) + 900000);
   const before = new Date().getTime();
   const T = 1; // time needed to complete a VU iteration
@@ -69,4 +69,4 @@ export default function() {
     console.warn(`Timer exhausted! The execution time of the test took longer than ${T} seconds`);
   }
 
-};
+};*/
