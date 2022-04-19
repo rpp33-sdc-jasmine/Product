@@ -15,7 +15,7 @@ const allProducts = async (page, count, callback) => {
   const queryString = `SELECT * FROM product ORDER BY id LIMIT ${count} OFFSET ${page * count}`;
   await pool.query(queryString, (err, res) => {
     if(err) {
-      console.log(err.message);
+      callback(err, null);
     } else {
       callback(null, res.rows);
     }
@@ -30,7 +30,7 @@ const productInfo = async (product_id, callback) => {
   GROUP BY product.id`;
   await pool.query(queryString, (err,res) => {
     if(err) {
-      console.log(err.message);
+      callback(err, null);
     } else {
       callback(null, res.rows[0]);
     }
@@ -52,7 +52,7 @@ const productStyle = async (product_id, callback) => {
   `;
   await pool.query(queryString, (err,res) => {
     if(err) {
-      console.log(err.message);
+      callback(err, null);
     } else {
       callback(null, res.rows[0]);
     }
@@ -64,7 +64,7 @@ const relatedProducts = async (product_id, callback) => {
   FROM related WHERE current_product_id = ${product_id}`
   await pool.query(queryString, (err,res) => {
     if(err) {
-      console.log(err.message);
+      callback(err, null);
     } else {
       callback(null, res.rows[0].related);
     }
