@@ -7,7 +7,7 @@ describe('testing postgres', () => {
 
   beforeAll(() => {
     pool = new Pool({
-      user:'root',
+      user:'postgres',
       host: 'localhost',
       database: 'sdc',
       password: key,

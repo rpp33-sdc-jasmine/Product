@@ -4,11 +4,11 @@ const {key} = require('../config.js');
 // connet with a connection pool
 
 const pool = new Pool({
-  user:'root',
-  host: 'localhost',
+  user:'postgres',
+  host: '3.80.157.19',
   database: 'sdc',
   password: 'password',
-  port: 5432,
+  port: 5432
 });
 
 const allProducts = async (page, count, callback) => {
